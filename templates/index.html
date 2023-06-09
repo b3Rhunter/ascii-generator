@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+  <head>
+
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+
+        <script>
+          function copyToClipboard() {
+              var copyText = document.getElementById("copyTarget");
+              copyText.select();
+              copyText.setSelectionRange(0, 99999);  // for mobile devices
+              document.execCommand("copy");
+              alert("Copied the ASCII art!");
+          }
+      </script>
+</head>
+<body class="wrapper">
+  <div class="content">
+    <div class="inputs">
+<form class="form" method="POST">
+  <textarea name="text"></textarea>
+  <input type="submit" value="Convert to ASCII">
+</form>
+</div>
+{% if ascii_art %}
+    <textarea id="copyTarget" style="opacity: 0; position: absolute; pointer-events: none;">{{ ascii_art }}</textarea>
+    <pre class="ascii-art">{{ ascii_art }}</pre>
+    <button onclick="copyToClipboard()">Copy ASCII Art</button>
+{% endif %}
+</div>
+</body>
+</html>
